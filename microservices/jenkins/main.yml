@@ -24,6 +24,30 @@
           num_cpus: "{{ num_cpus }}"
         networks:
           - name: "{{ vlan_name }}"
-            memory_mb: "{{ memory_mb }}"
-            num_cpus: "{{ num_cpus }}"
-          
+            ip: "{{ ip_address }}"
+            netmask: "{{ num_cpus }}"
+            gateway: "{{ gateway }}"
+            dns_servers:
+            - "{{ dns1 }}"
+            - "{{ dns2 }}"
+           type: static
+           connected: yes
+           start_connected: yes
+         wait_for_ip_address: yes
+         cusctomization:
+           autologon: yes
+           autologoncount: 3
+           dns_servers:
+             - "{{ dns1 }}"
+             - "{{ dns2 }}"
+            domain: "{{ lookup('env','DOMAIN') }}"
+            domainadmin: "{{ lookup('env','DOMAINADMIN') }}"
+            domainadminpassword: "{{ lookup('env','DOMAINADMINPASSWORD') }}"
+            hostname: "{{ lookup('env','vm_hostname') }}"
+            password: "{{ lookup('env','local_admin_pass') }}"
+            joindomain: "{{ lookup('env','DOMAIN') }}"
+            runonce:
+            - powershell.exe -ExecutionPolicy Unrestricted -File C:\customization\preConf.ps1
+         wait_for-customization: yes
+         validate_certs: false
+       delegate_to: localhost  
