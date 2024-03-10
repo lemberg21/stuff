@@ -23,7 +23,7 @@ try {
 
 $HashArguments = @{
     Credential = get_creds $env:USER $env:PASSWD
-    DomainName = "corp.contoso.com"
+    DomainName = $env:DOMAIN
     InstallDns = $true
 }
 Install-ADDSDomainController @HashArguments
