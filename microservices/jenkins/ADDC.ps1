@@ -2,7 +2,7 @@
 ############# Windows AD DC Configuretion ################
 #Variables
 $date = Get-Date -UFormat "%Y%m%d"
-$logs = C:\customization\$date-ADDC_install.txt
+$logs = C:\customization\ADDC_install-$date.txt
 
 
 #########################################################
