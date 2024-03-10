@@ -6,7 +6,8 @@ $logs = C:\customization\$date-ADDC_install.
 
 
 #########################################################
-Start-Transcript
+Start-Transcript 
+
 
 function get_creds (){
   param(
@@ -22,10 +23,20 @@ function get_creds (){
 try {
 
 $HashArguments = @{
+    NoGlobalCatalog = $false
+    CreateDnsDelegation = $false
+    CriticalReplicationOnly = $false
+    DatabasePath = "C;\Windows\NTDS"
+    InstallDns = $true
+    LogPath = "C;\Windows\NTDS"
+    SysvolPath = "C;\Windows\SYSVOL"
     Credential = get_creds $env:USER $env:PASSWD
     DomainName = $env:DOMAIN
-    InstallDns = $true
+    Force =$true
 }
+
+install-windowsfuture -name AD-Domain_Services -IncludeManagemetTools
+Import-Module ADDSDeployment
 Install-ADDSDomainController @HashArguments
 
 }
@@ -33,6 +44,5 @@ catch {
   Write-Error -Message $_
   exit 1;
 }
-
 
 Stop-Transcript
