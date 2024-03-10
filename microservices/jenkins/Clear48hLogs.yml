@@ -1,1 +1,6 @@
--
+- name: Create cron  to delete logs in vcn every 48 hours
+  hosts: all_grpups
+  become: true
+
+  tasks:
+  - 
