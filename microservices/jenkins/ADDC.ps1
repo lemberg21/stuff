@@ -1,12 +1,14 @@
 ##########################################################
 ############# Windows AD DC Configuretion ################
 #Variables
-$logs = C:\customization
+$Date = 
+$logs = C:\customization\
 
 
 #########################################################
 Start-Transcript
 
+$pass = ConvertTo
 
 try {
 
