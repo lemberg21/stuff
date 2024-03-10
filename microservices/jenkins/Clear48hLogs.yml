@@ -3,4 +3,15 @@
   become: true
 
   tasks:
-  - 
+    - name: Create cron job 
+      ansible.builtin.cron:
+        name: clear logs
+        minute: 0
+        hour: 0
+        job: /usr/bin/find /data/backup/ -name 'sel-*' -mtime +5 -delete
+        state: present
+    - name: Grab the list of cron jobs
+      shell: 'crontab -l'
+      register: Command_output
+    - debug:
+        var: command_output.stdout_lines
