@@ -14,3 +14,16 @@
         datacenter: "{{ lookup('env','datacenter') }}"
         cluster: "{{ cluster }}"
         template:  "{{ lookup('env','template') }}"
+        name:  "{{ lookup('env','vm_hostname') }}"
+        disk:
+           - size_gb: "{{ disk_size }}"
+             type: "thin"
+             autoselect_datastore: yes
+        hardware:
+          memory_mb: "{{ memory_mb }}"
+          num_cpus: "{{ num_cpus }}"
+        networks:
+          - name: "{{ vlan_name }}"
+            memory_mb: "{{ memory_mb }}"
+            num_cpus: "{{ num_cpus }}"
+          
