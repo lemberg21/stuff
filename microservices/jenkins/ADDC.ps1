@@ -6,8 +6,8 @@ $logs = C:\customization\$date-ADDC_install.txt
 
 
 #########################################################
-Start-Transcript 
-cd $PSScriptRoot
+Start-Transcript -Path $logs
+Set-Location $PSScriptRoot
 
 function get_creds (){
   param(
