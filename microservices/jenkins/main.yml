@@ -2,3 +2,15 @@
 - name: Create a windows vm from template vm
   hosts: "{{ lookup('env','HOSTS') }}"
   gather_facts: false
+  collections:
+    - community.vmware
+  tasks:
+    - name: Instant clone a VM with quest_customization
+      vmware_guest:
+        hostname: "{{ lookup('env','vcenter_hostname') }}"
+        username: "{{ lookup('env','vcenter_username') }}"
+        password: "{{ lookup('env','vcenter_password') }}"
+        folder: "{{ lookup('env','folder') }}"
+        datacenter: "{{ lookup('env','datacenter') }}"
+        cluster: "{{ cluster }}"
+        template:  "{{ lookup('env','template') }}"
