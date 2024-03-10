@@ -1,0 +1,4 @@
+---
+- name: Create a windows vm from template vm
+  hosts: "{{ lookup('env','HOSTS') }}"
+  gather_facts: false
