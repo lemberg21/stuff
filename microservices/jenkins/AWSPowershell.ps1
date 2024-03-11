@@ -1,5 +1,5 @@
 #Install-Module AWS.Tools.Installer
-#Install-AWSToolsModule S3, SSO, SSOOIDC
+#Install-AWSToolsModule S3, SSO, SSOOIDC, EC2
 
 Import-Module AWS.Tools.SSO
 Import-Module AWS.Tools.SSOOIDC
