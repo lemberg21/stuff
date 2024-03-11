@@ -4,4 +4,11 @@
 Import-Module AWS.Tools.SSO
 Import-Module AWS.Tools.SSOOIDC
 aws sso login
-Get-S3Bucket
+
+
+New-EC2Instance -ImageId ami-c49c0dac `
+    -MinCount 1 `
+    -MaxCount 1 `
+    -KeyName PSKeyPair `
+    -SecurityGroups PSSecurityGroup `
+    -InstanceType t2.micro
