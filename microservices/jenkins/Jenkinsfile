@@ -22,7 +22,7 @@ pipeline {
   stage( 'Configure' ){
     agent { label 'windows'}
     steps{  
-      echo 'Execute Ansible playbook'  
+      echo 'Configuration script'  
       bat 'powershell C:/customization/ADDC.ps1'
 }
 }
