@@ -1,2 +1,1 @@
-# stuff
-This is project 
+#NAME
