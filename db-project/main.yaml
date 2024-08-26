@@ -105,7 +105,7 @@
       docker_compose:
         project_src: /data/db-project
         files: 
-        - docker-compose.yml
+        - docker-compose.yaml
 
         
 
