@@ -3,3 +3,4 @@ __SDCA__ - Small Database Cluster Automation  is automation for deploy simple cl
 ## SYNOPSIS
 Common usage:
 For perform different tests with database queris, etc.
+### REQUIREMENTS
