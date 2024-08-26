@@ -1,3 +1,4 @@
 # NAME
-SDC - Small Database Cluster is cluster of database service
+___SDCA__ - Small Database Cluster Automation  is automation for deploy simple cluster of database service
 ## SYNOPSIS
+Common usage:
