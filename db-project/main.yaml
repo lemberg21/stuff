@@ -18,7 +18,7 @@
         shell: /bin/bash
     - name: Install dependencies
       apt:
-        name: "{{item}}"
+        name: "{{ item }}"
         state: present
         update_cache: yes
       loop:
