@@ -6,7 +6,7 @@ services:
     env_file:
       - ./config/mysql.env 
     ports:
-      - ${PORT}:${PORT}
+      - "${PORT}:${PORT}"
     volumes:
       - "/var/lib/mysqld:/var/lib/mysql"
   adminer:
@@ -15,4 +15,4 @@ services:
     env_file:
       - ./config/adminer.env
     ports:
-      - ${PORT}:${PORT}
+      - "${PORT1}:${PORT1}"
