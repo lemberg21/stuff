@@ -3,10 +3,16 @@ services:
   adminer:
     image: adminer:latest
     restart: always
+    env_file:
+      - ./config/adminer.env
     ports:
       - "8080:8080"
   mysql_db:
     image: mysql:latest
     restart: always
-    environment:
-      - MYSQL_ROOT_PASSWORD='3fk0ddqv'
+    env_file:
+      - ./config/mysql.env 
+    ports:
+      - "3306:3306"
+    volumes:
+      - "/var/lib/mysqld:/var/lib/mysql"
