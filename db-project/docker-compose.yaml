@@ -1,18 +1,12 @@
-version: '3'
+version: '3.1'
 services:
-  mysql_db:
-    image: mysql:latest
-    restart: always
-    env_file:
-      - ./config/mysql.env 
-    ports:
-      - "${PORT}:3307"
-    volumes:
-      - "/var/lib/mysqld:/var/lib/mysql"
   adminer:
     image: adminer:latest
     restart: always
-    env_file:
-      - ./config/adminer.env
     ports:
-      - "${PORT1}:8080"
+      - "8080:8080"
+  mysql_db:
+    image: mysql:latest
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD='3fk0ddqv'
