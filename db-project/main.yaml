@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: Docker
   become: true
   gather_facts: false
   tasks:
@@ -99,19 +99,13 @@
     - name: Clone Remote Git Repository
       git:
         repo: 'https://github.com/lemberg21/stuff.git'
-        dest: /data/db-project
+        dest: /data/db-project/db-project
+        version: main
         clone: true
-    - name: Build database infra
-      docker_compose:
-        project_src: /data/db-project
-        files: 
-        - docker-compose.yaml
-
-        
-
-
-
-
+    - name: Run container
+      shell:
+        cmd: "docker compose up -d"
+        chdir: /data/db-project/db-project
 
 
 
