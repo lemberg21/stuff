@@ -1,0 +1,18 @@
+---
+- name: Export Ansible Automation Platform Assets
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Export AAP assets
+      ansible.builtin.command:
+        cmd: "ansible-automation-platform export --all --output {{ export_path }}"
+      register: export_result
+
+    - name: Display export result
+      ansible.builtin.debug:
+        var: export_result.stdout_lines
+
+    - name: Check if export was successful
+      ansible.builtin.fail:
+        msg: "Export failed!"
+      when: export_result.rc != 0
