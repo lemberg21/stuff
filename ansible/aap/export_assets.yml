@@ -1,18 +1,25 @@
+
 ---
-- name: Export Ansible Automation Platform Assets
+- name: Export Ansible Controller assets and push to GitHub
   hosts: localhost
-  gather_facts: no
+  connection: local
+  vars_files:
+    - vault.yml
+
   tasks:
-    - name: Export AAP assets
-      ansible.builtin.command:
-        cmd: "ansible-automation-platform export --all --output {{ export_path }}"
-      register: export_result
+    - name: Export all assets to file
+      ansible.controller.export_assets:
+        controller_host: "{{ ansible_controller_host }}"
+        controller_username: "{{ ansible_controller_username }}"
+        controller_oauth_token: "{{ oauth_token }}"
+        validate_certs: false
+        all: true
+        path: "./exported_assets.json"
 
-    - name: Display export result
-      ansible.builtin.debug:
-        var: export_result.stdout_lines
-
-    - name: Check if export was successful
-      ansible.builtin.fail:
-        msg: "Export failed!"
-      when: export_result.rc != 0
+    - name: Commit exported assets to git
+      shell: |
+        git add exported_assets.json
+        git commit -m "Exported Ansible Controller assets"
+        git push origin main
+      args:
+        chdir: /path/to/your/git/repo
