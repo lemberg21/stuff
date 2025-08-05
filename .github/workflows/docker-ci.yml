@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: [ "stage" ]
 
+env:
+  DOCKER_IMAGE: localhost:5000/vkhomysh/web-001
+  BUILDX_VERSION: v1
+
+
 jobs:
 
   build:
@@ -15,6 +20,12 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Extract Docker image metadata
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKER_IMAGE }}:${{ env.BUILDX_VERSION }}
+
     - name: Log in to Docker Hub
       uses: docker/login-action@v3
       with:
@@ -22,7 +33,7 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
         
     - name: Build the Docker image
-      run: docker build app/dev/microservices/project01 --file app/dev/microservices/project01/Dockerfile --tag vkhomysh/web-001:v2
+      run: docker build . --file Dockerfile --tag ${{ env.DOCKER_IMAGE }}:${{ env.BUILDX_VERSION }}
       
     - name: Push the Docker image to Docker Hub
-      run: docker push vkhomysh/web-001:v2
+      run: docker push ${{ env.DOCKER_IMAGE }}:${{ env.BUILDX_VERSION }}
