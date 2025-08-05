@@ -1,0 +1,25 @@
+
+---
+- name: Export Ansible Controller assets and push to GitHub
+  hosts: localhost
+  connection: local
+  vars_files:
+    - vault.yml
+
+  tasks:
+    - name: Export all assets to file
+      ansible.controller.export_assets:
+        controller_host: "{{ ansible_controller_host }}"
+        controller_username: "{{ ansible_controller_username }}"
+        controller_oauth_token: "{{ oauth_token }}"
+        validate_certs: false
+        all: true
+        path: "./exported_assets.json"
+
+    - name: Commit exported assets to git
+      shell: |
+        git add exported_assets.json
+        git commit -m "Exported Ansible Controller assets"
+        git push origin main
+      args:
+        chdir: /path/to/your/git/repo
