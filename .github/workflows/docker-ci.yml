@@ -3,6 +3,8 @@ name: Docker Image CI
 on:
   push:
     branches: [ "stage" ]
+
+    paths: ['dev/microservices/project01/Dockerfile']
   pull_request:
     branches: [ "stage" ]
 
@@ -32,8 +34,7 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
         
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ${{ env.DOCKER_IMAGE }}:${{ env.BUILDX_VERSION }}
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
       
-    - name: Push the Docker image to Docker Hub
-      run: docker push ${{ env.DOCKER_IMAGE }}:${{ env.BUILDX_VERSION }}
+    
