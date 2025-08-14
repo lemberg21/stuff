@@ -1,0 +1,21 @@
+name: ECR Image CI
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Configure AWS credential
+      uses: aws-actions/configure-aws-credentials@v3
+      with:
+        role-to-assume: arn:aws:iam::841162704707:role/github.to.aws.oicd
+        aws-region: us-west-2
+
