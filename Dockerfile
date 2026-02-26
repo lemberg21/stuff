@@ -16,9 +16,9 @@
 
 
 
- FROM ubuntu:latest 
+FROM ubuntu:latest 
 RUN apt -y update && apt -y upgrade
 RUN apt -y install apache2 php
-COPY ./index.php /var/www/html/index.php
+#COPY ./index.php /var/www/html/index.php
 EXPOSE 80
 CMD ["apachectl", "-D", "FOREGROUND"]
